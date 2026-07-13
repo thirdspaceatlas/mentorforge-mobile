@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "277640901613",
+    "project_id": "mentorforge-373b2",
+    "storage_bucket": "mentorforge-373b2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277640901613:android:885fc2745f1ae0b0fdade4",
+        "android_client_info": {
+          "package_name": "com.mentorforge.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIjgNCFx-V3lMyBI2ACY14IxvfqxRy390"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
