@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { signInWithGoogle } from '@/lib/google-auth';
+import { signInWithGoogle, isNativeGoogleSignInAvailable } from '@/lib/google-auth';
 import { supabase } from '@/lib/supabase';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 
@@ -19,6 +19,7 @@ export function LoginScreen() {
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const nativeGoogle = isNativeGoogleSignInAvailable();
 
   async function handleGoogleSignIn() {
     setBusy(true);
@@ -77,6 +78,12 @@ export function LoginScreen() {
               </ThemedText>
             )}
           </Pressable>
+          {!nativeGoogle ? (
+            <ThemedText type="small" style={styles.hint}>
+              Using browser Google sign-in (Expo Go). For native Sign-In, install
+              an EAS development build.
+            </ThemedText>
+          ) : null}
 
           <View style={styles.dividerRow}>
             <View style={styles.divider} />
@@ -197,5 +204,9 @@ const styles = StyleSheet.create({
   error: {
     color: '#b91c1c',
     textAlign: 'center',
+  },
+  hint: {
+    textAlign: 'center',
+    opacity: 0.7,
   },
 });
