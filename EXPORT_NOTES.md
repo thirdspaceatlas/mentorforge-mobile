@@ -1,8 +1,27 @@
 # MentorForge Mobile — Export to `mentorforge-mobile`
 
-This bundle is the production-ready Expo app, cleaned for your repo. The tarball
-`mentorforge-mobile-frontend.tar.gz` contains **only source** — no `node_modules`,
-no build caches, no preview-only `.env`, no secrets.
+This bundle is the production-ready Expo app, cleaned for your repo.
+
+## Emergent → GitHub vs tarball
+
+**Save to GitHub** (`import/emergent-export`) pushes the **whole Emergent workspace** —
+`frontend/`, the retired `backend/` stub, tests, patches, etc. The backend stub is
+harmless (real API is `https://www.mentorforge.co`); just **do not run EAS from repo
+root on that branch**. Either:
+
+- Build from **`frontend/`** on `import/emergent-export`, or
+- Use branch **`merge/emergent-export`** (frontend extracted to repo root — **build EAS here**).
+
+Emergent does **not** document a frontend-only GitHub push. For a clean frontend-only
+drop, use the prepared **`mentorforge-mobile-frontend.tar.gz`** tarball instead of
+Save to GitHub.
+
+If the Emergent UI only offers a new/default repo and won't target
+`thirdspaceatlas/mentorforge-mobile`, contact Emergent support with your **job ID** to
+enable repo-specific targeting.
+
+The tarball contains **only source** — no `node_modules`, no build caches, no
+preview-only `.env`, no secrets.
 
 ## What's included
 ```
@@ -31,12 +50,22 @@ Only these are needed at build time; everything else has safe defaults:
 - `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` / `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` / `EXPO_PUBLIC_GOOGLE_IOS_URL_SCHEME`
 
 ## Confirm before Play submit (app.json)
-Reconciled for `third-space-atlas` / EAS project `7947e132-5b5f-4e08-812c-21dedd501f70`:
-- `expo.name` = `"MentorForge-mobile"`
-- `expo.slug` = `"MentorForge-mobile"`
-- `extra.eas.projectId` — set
-- `com.mentorforge.app` + calendar/notification permissions — set
-- Production env: set **`EXPO_PUBLIC_API_URL`** (and Supabase/Google vars) in EAS only
+
+On **`merge/emergent-export`** these are already reconciled:
+
+| Field | Value |
+|-------|-------|
+| `expo.name` / `expo.slug` | `MentorForge-mobile` |
+| `extra.eas.projectId` | `7947e132-5b5f-4e08-812c-21dedd501f70` |
+| `owner` | `third-space-atlas` |
+| Android package / iOS bundle | `com.mentorforge.app` |
+| Calendar + notification permissions | set |
+
+Still verify before each production build:
+
+- **`eas.json`** — `production.autoIncrement: true` bumps `versionCode` (last Play build was **3** → next is **4**)
+- **EAS env vars** — `EXPO_PUBLIC_API_URL`, Supabase, Google client IDs (not in git)
+- **Play Data safety** — add **Calendar events** for this build (v3 was login-only)
 
 ## Native-only features (validate on the dev/production build, not Expo Go)
 - Native Google Sign-In (`@react-native-google-signin/google-signin`)
