@@ -28,7 +28,7 @@ preview-only `.env`, no secrets.
 app/            Expo Router screens (tabs, auth, onboarding, availability, rebalance)
 src/            api client, services (calendar, notifications, googleSignIn), context, lib
 assets/ constants/ scripts/
-app.json  package.json  yarn.lock  tsconfig.json  metro.config.js  eslint.config.js
+app.json  package.json  package-lock.json  tsconfig.json  metro.config.js  eslint.config.js
 google-services.json  GoogleService-Info.plist   (Google/Firebase config)
 .env.example    (copy → .env; real values go in EAS env vars)
 ```
@@ -40,7 +40,7 @@ google-services.json  GoogleService-Info.plist   (Google/Firebase config)
 
 ## Drop-in steps
 1. Extract into your `mentorforge-mobile` repo root (or a `frontend/` subdir if you keep the split).
-2. `yarn install` (repo pins `packageManager`/`.yarnrc`; Node 20 ok via `ignore-engines`).
+2. `npm ci --legacy-peer-deps` (lockfile is `package-lock.json`; EAS production uses the same).
 3. `cp .env.example .env` and fill the empty values (or set them as EAS env vars).
 
 ## EAS env vars to set (Project → Environment variables)
